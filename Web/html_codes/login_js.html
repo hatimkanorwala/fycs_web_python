@@ -1,0 +1,78 @@
+<html>
+	<head>
+		<title>Login</title>
+	</head>
+	<body>
+		<table border="1">
+			<form>
+				<tr>
+					<th>Enter Username:</th>
+					<td><input type="text" name="username" id="username" placeholder="Enter Username" /></td>
+					<td id="username_error"></td>
+				</tr>
+				<tr>
+					<th>Enter Password:</th>
+					<td><input type="password" name="password" id="password" placeholder="Enter Password" /></td>					
+					<td id="password_error"></td>
+				</tr>
+				<tr>
+					<th colspan="2">
+						<input type="button" name="btnSubmit" value="Login" onclick="validateUser()" />
+					</th>
+				</tr>
+			</form>
+		</table>
+		<script type="text/javascript"> 
+			document.getElementById("username_error").style.display = "none";
+			document.getElementById("password_error").style.display = "none";
+			function validateUser()
+			{
+				var username = document.getElementById("username").value;
+				var password = document.getElementById("password").value;
+				if(username.length > 0 && password.length > 0){
+					if(password.length <= 8){
+						//alert("Password Length should be greater than 8 characters");
+						document.getElementById("password_error").innerHTML = "Password Length should be greater than 8 characters";
+						document.getElementById("password_error").style.display = "block";
+						document.getElementById("password").focus();
+						document.getElementById("password_error").style.color = "red"; 
+						hideError("username_error");
+					}
+					else if(password.length > 8){
+						if(username == "admin" && password == "admin@1234"){
+							alert("Login Successful");
+							hideError("password_error");
+							hideError("username_error");
+						}
+						else{
+							alert("Failed to Login");
+							hideError("password_error");
+							hideError("username_error");
+						}
+					}
+				}
+				else if(username.length <= 0){
+						//alert("Username cannot be blank");
+						document.getElementById("username").focus();
+						document.getElementById("username_error").innerHTML = "Username cannot be blank";	
+						document.getElementById("username_error").style.display = "block";
+						document.getElementById("username_error").style.color = "red"; 
+						hideError("password_error");
+				}
+				else if(password.length <= 0){	
+						//alert("Password cannot be blank");					
+						document.getElementById("password").focus();
+						document.getElementById("password_error").innerHTML = "Password Cannot be blank";
+						document.getElementById("password_error").style.display = "block";
+						document.getElementById("password_error").style.color = "red"; 
+						hideError("username_error");
+				}
+			}
+			function hideError(val)
+			{
+				document.getElementById(val).style.display = "none";
+				document.getElementById(val).innerHTML = "";
+			}
+		</script>
+	</body>
+</html>

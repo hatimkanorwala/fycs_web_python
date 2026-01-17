@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+            resize: vertical;
+            min-height: 80px;
+        }
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        #todoBody td:first-child {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            th, td {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Todo List</h1>
+       
+        <div class="input-group">
+            <label for="title">Todo Title:</label>
+            <input type="text" id="title" placeholder="Enter todo title...">
+        </div>
+        <div class="input-group">
+            <label for="description">Description:</label>
+            <textarea id="description" placeholder="Enter description..."></textarea>
+        </div>
+        <input type="button" name="btnSubmit" value="Add ToDo" onclick="addTodo()">
+        <table id="todoTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Date Added</th>
+                </tr>
+            </thead>
+            <tbody id="todoBody">
+            </tbody>
+        </table>
+    </div>
+    <script>
+        let todoCount = 0;
+        function addTodo() {
+            // Get input values
+            const title = document.getElementById('title').value.trim();
+            const description = document.getElementById('description').value.trim();
+            // Validate input
+            if (title === '') {
+                alert('Please enter a title!');
+                return;
+            }
+            // Increment counter
+            todoCount++;
+            // Get table body
+            const tbody = document.getElementById('todoBody');
+            // Create new row
+            const newRow = document.createElement('tr');
+            // Create cells
+            const numberCell = document.createElement('td');
+            numberCell.textContent = todoCount;
+            const titleCell = document.createElement('td');
+            titleCell.textContent = title;
+            const descCell = document.createElement('td');
+            descCell.textContent = description || '(No description)';
+            const dateCell = document.createElement('td');
+            const now = new Date();
+            dateCell.textContent = now.toLocaleString();
+            // Append cells to row
+            newRow.appendChild(numberCell);
+            newRow.appendChild(titleCell);
+            newRow.appendChild(descCell);
+            newRow.appendChild(dateCell);
+            // Append row to table body
+            tbody.appendChild(newRow);
+            // Clear input fields
+            document.getElementById('title').value = '';
+            document.getElementById('description').value = '';
+            // Focus back to title input
+            document.getElementById('title').focus();
+        }
+    </script>
+</body>
+</html>

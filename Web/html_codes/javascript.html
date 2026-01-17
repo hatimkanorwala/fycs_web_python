@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			document.write("<br />Javascript from head Tag");
+		</script>
+	</head>
+	<body>
+		<script type="text/javascript"> 
+			function calculation(num1,num2,op)
+			{
+				var result = 0;
+				switch(op)
+				{
+					case "1":
+						result = num1+ num2;
+						break;
+					case "2":
+						result = num1 - num2;
+						break;
+					case "3:":
+						result = num1 * num2;
+						break;
+					case "4":
+						result = num1 / num2;
+						break;	
+					case "5":
+						result = num1 % num2;
+						break;
+					default:
+						result = 0;
+				}
+				document.write("<br />Result: " + result);
+				alert("Result: " + result);
+			}
+			document.write("<br />Javascript from body Tag");
+			var num1 = parseInt(prompt("Enter 1st Number: "));
+			var num2 = parseInt(prompt("Enter 2nd Number: "));
+			var op = prompt("Enter Operation\n1.Addition\n2.Subtraction\n3.Multiplication\n4.Division\n5.Modulus\nSelect Operation: ");
+			calculation(num1,num2,op);
+		</script>
+	</body>
+</html>
